@@ -1,5 +1,6 @@
-package edu.ucdistancetracker;
+package edu.uc.ui;
 
+import edu.ucdistancetracker.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
