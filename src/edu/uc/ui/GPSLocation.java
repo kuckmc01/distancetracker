@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class GPSLocation extends Activity {
 
@@ -15,15 +16,14 @@ public class GPSLocation extends Activity {
 	LocationListener locationListener;
 	//time measured in seconds
 	private int gpsInterval = 60;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		initLocationListener();
-		
 	}
 	private void initLocationListener(){
 		locationListener = new LocationListener(){
@@ -60,6 +60,7 @@ public class GPSLocation extends Activity {
 	protected void requestUpdates(){
 		if(locationListener != null  && locationManager != null){
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval * 1000, 0, locationListener);
+			Toast.makeText(GPSLocation.this, "GPS location" + latitude + " " + longitude, 1).show();
 		}
 	}
 	public double getLongitude() {

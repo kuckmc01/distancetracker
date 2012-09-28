@@ -11,9 +11,7 @@ public interface IGPSService  {
 	// returns true if the GPS is still tracking coordinates
 	public boolean trackingStatus();
 	
-	public void startLocationManager();
-	
-	public void startLocationListener();
+
 	
 	
 	

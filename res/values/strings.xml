@@ -13,5 +13,11 @@
     <string name="title_activity_stop_tracking_gps">StopTrackingGPSActivity</string>
     <string name="title_activity_results">ResultsActivity</string>
     <string name="btn_skip_tutorial">Skip Tutorial</string>
+    <string name="lbltracking_stopped">Tracking Stopped</string>
+    <string name="lbllat">lat:</string>
+    <string name="lbllong">long:</string>
+    <string name="lblstarttime">Start Time:</string>
+    <string name="lblstoptime">Time Stopped:</string>
+    <string name="chronometer">Chronometer</string>
 
 </resources>
