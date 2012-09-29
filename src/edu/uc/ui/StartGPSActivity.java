@@ -3,8 +3,9 @@ package edu.uc.ui;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Date;
-
+import edu.uc.service.GPSServiceStub;
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,17 +26,24 @@ public class StartGPSActivity extends Activity {
 	private static final String tag = "StartGPSActivity";
 	private double latitude;
 	private double longitude;
+	private String startTime;
+	private String endTime;
+	private String todaysDate;
+	private String currentTime;
 
 	LocationManager locationManager;
 	LocationListener locationListener;
 	String timeNow;
 	Chronometer timer;
 	DateFormat formattedTime;
+	DateFormat formattedDate;
+	GPSServiceStub service; 
 
-	private int gpsInterval = 60;
+	private int gpsInterval = 15;
 
 	protected Button btnStartGPSTracking;
 	protected Button btnStopGPSTracking;
+	protected Button btnViewResults;
 	protected TextView lblCurrentlyTracking;
 	protected TextView lblTrackingStopped;
 	protected TextView lblLat;
@@ -57,6 +65,7 @@ public class StartGPSActivity extends Activity {
 
 		btnStartGPSTracking = (Button) findViewById(R.id.btnstartgpstracking);
 		btnStopGPSTracking = (Button) findViewById(R.id.btnstoptracking);
+		btnViewResults = (Button) findViewById(R.id.btnviewresults);
 		lblCurrentlyTracking = (TextView) findViewById(R.id.lblcurrentlytracking);
 		lblTrackingStopped = (TextView) findViewById(R.id.lblstoptracking);
 		lblLat = (TextView)	findViewById(R.id.lbllat);
@@ -64,25 +73,37 @@ public class StartGPSActivity extends Activity {
 		lblStartTime = (TextView) findViewById(R.id.lblstarttime);
 		lblStopTime = (TextView) findViewById(R.id.lblstoptime);
 		timer = (Chronometer) findViewById(R.id.chronometer1);
-
-		formattedTime = new SimpleDateFormat("hh:mm:ss.SSS");
+		service = new GPSServiceStub();
+		formattedTime = new SimpleDateFormat("hh:mm:ss");
+		formattedDate = new SimpleDateFormat("yyyy/MM/dd");
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		initLocationListener();
 
 
-
+/** TODO:
+ * The button starts gps tracking
+ * need to save the following items to the DATABASE through the service layer and persistence layer:
+ * -coordinates
+ * -time started
+ */
 		btnStartGPSTracking.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				//start recording gps coordinates
-
+				
+				todaysDate = formattedDate.format(new Date());
+				service.saveTodaysDate(todaysDate);
+				
 				requestUpdates();
 				if(currentState == state2)
 				{
+					
 					timer.setBase(SystemClock.elapsedRealtime());
 					timer.start();
 					currentState = state4;
 					changeVisibility(lblTrackingStopped);
-					lblStartTime.setText("Start time: " + formattedTime.format(new Date()));
+					changeVisibility(btnViewResults);
+					startTime = formattedTime.format(new Date());
+					lblStartTime.setText("Start time: " + startTime);
 					lblStopTime.setText("Time stopped: ");
 					
 				}
@@ -90,18 +111,23 @@ public class StartGPSActivity extends Activity {
 				//stop button should become visible, currently tracking label should become visible
 				if(currentState == 0  || currentState == state4)
 				{
+					
 					timer.start();
 					currentState = state1;
 					changeVisibility(btnStartGPSTracking);
 					changeVisibility(btnStopGPSTracking);
 					changeVisibility(lblCurrentlyTracking);
-					lblStartTime.setText("Start time: " + formattedTime.format(new Date()));
+					startTime = formattedTime.format(new Date());
+					lblStartTime.setText("Start time: " + startTime);
+					service.saveStartTime(startTime);
 				}
-
-				
-
 			}
 		});
+		/**TODO:
+		 * need to save the following items to the DATABASE through the service layer and persistence layer:
+		 * -ending coordinates
+		 * -ending time
+		 */
 		btnStopGPSTracking.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -115,11 +141,24 @@ public class StartGPSActivity extends Activity {
 					currentState = state2;
 					changeVisibility(btnStopGPSTracking);
 					changeVisibility(btnStartGPSTracking);
+					changeVisibility(btnViewResults);
 					changeVisibility(lblCurrentlyTracking);
 					changeVisibility(lblTrackingStopped);
 				}
+				endTime = formattedTime.format(new Date());
+				lblStopTime.setText("Time stopped: " + endTime);
+				service.saveEndTime(endTime);
 				
-				lblStopTime.setText("Time stopped: " + formattedTime.format(new Date()));
+				//must be called last
+				service.saveDistanceObject();
+			}
+		});
+		btnViewResults.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), ResultsActivity.class);
+				startActivityForResult(intent, 0);
+				
 			}
 		});
 	}
@@ -134,7 +173,9 @@ public class StartGPSActivity extends Activity {
 
 				lblLat.setText("lat: " + latitude);
 				lblLong.setText("long: " + longitude);
-
+				currentTime = formattedTime.format(new Date());
+				service.saveCoordinates(currentTime, latitude, longitude);
+				Toast.makeText(StartGPSActivity.this, "lat: " + latitude + " lng: " + longitude, Toast.LENGTH_LONG).show();
 
 			}
 
@@ -173,10 +214,16 @@ public class StartGPSActivity extends Activity {
 		locationManager.removeUpdates(locationListener);
 
 	}
+	/**
+	 * TODO: need to change this portion so that gps is tracked every 15 or 30 secs for accuracy on the map later on
+	 * need to save each changed coordinates to the database to outline them on the map
+	 */
 	protected void requestUpdates(){
 		if(locationListener != null  && locationManager != null){
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval * 1000, 0, locationListener);
 			//Toast.makeText(context, text, duration)
+			
+			
 		}
 	}
 	private void changeVisibility(TextView textView ){

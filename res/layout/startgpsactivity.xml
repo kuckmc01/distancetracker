@@ -3,19 +3,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    
-    
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:orientation="horizontal" >
+
     <TextView
         android:id="@+id/lblcurrentlytracking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="14dp"
         android:text="@string/currently_tracking_"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/lblstoptime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/lblstoptime" />
+
+    <TextView
+        android:id="@+id/lblstarttime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lblstoptime"
+        android:layout_alignParentLeft="true"
+        android:text="@string/lblstarttime" />
+
+    <Chronometer
+        android:id="@+id/chronometer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lblstarttime"
+        android:text="@string/chronometer" />
+
+    <Button
+        android:id="@+id/btnviewresults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chronometer1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="35dp"
+        android:text="@string/btnviewresults"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnstoptracking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnviewresults"
+        android:layout_alignParentLeft="true"
+        android:text="@string/stop_tracking"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnstartgpstracking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnstoptracking"
+        android:layout_alignParentLeft="true"
+        android:text="@string/start_tracking"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/lbllat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnstartgpstracking"
+        android:layout_marginBottom="55dp"
+        android:layout_marginLeft="76dp"
+        android:layout_toRightOf="@+id/chronometer1"
+        android:text="@string/lbllat" />
+
+    <TextView
+        android:id="@+id/lbllong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnstartgpstracking"
+        android:layout_alignLeft="@+id/lbllat"
+        android:layout_marginBottom="16dp"
+        android:text="@string/lbllong" />
 
     <TextView
         android:id="@+id/lblstoptracking"
@@ -25,69 +94,5 @@
         android:layout_centerHorizontal="true"
         android:text="@string/lbltracking_stopped"
         android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/btnstartgpstracking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lblstoptracking"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="141dp"
-        android:text="@string/start_tracking"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/btnstoptracking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/btnstartgpstracking"
-        android:layout_below="@+id/btnstartgpstracking"
-        android:text="@string/stop_tracking"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/lbllong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnstartgpstracking"
-        android:layout_alignLeft="@+id/lblcurrentlytracking"
-        android:layout_marginBottom="51dp"
-        android:text="@string/lbllong" />
-
-    <TextView
-        android:id="@+id/lbllat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lbllong"
-        android:layout_alignLeft="@+id/btnstoptracking"
-        android:layout_marginBottom="16dp"
-        android:text="@string/lbllat" />
-
-    <Chronometer
-        android:id="@+id/chronometer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/lbllong"
-        android:layout_below="@+id/btnstoptracking"
-        android:layout_marginTop="16dp"
-        android:text="@string/chronometer" />
-
-    <TextView
-        android:id="@+id/lblstarttime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chronometer1"
-        android:layout_marginTop="41dp"
-        android:text="@string/lblstarttime"
-        android:width="@dimen/timewidth" />
-
-    <TextView
-        android:id="@+id/lblstoptime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lblstarttime"
-        android:layout_below="@+id/lblstarttime"
-        android:text="@string/lblstoptime"
-        android:width="@dimen/timewidth" />
 
 </RelativeLayout>
