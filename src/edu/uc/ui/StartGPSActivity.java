@@ -50,7 +50,11 @@ public class StartGPSActivity extends Activity {
 	protected TextView lblLong;
 	protected TextView lblStartTime;
 	protected TextView lblStopTime;
-
+	/** State Control
+	 * This area controls the way items are display on the page
+	 * given a certain order, it is similar to a circuit board
+	 * I guess...
+	 */
 	protected int currentState = 0;
 	protected int state1 = 1;
 	protected int state2 = 2;
@@ -222,8 +226,7 @@ public class StartGPSActivity extends Activity {
 		if(locationListener != null  && locationManager != null){
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval * 1000, 0, locationListener);
 			//Toast.makeText(context, text, duration)
-			
-			
+
 		}
 	}
 	private void changeVisibility(TextView textView ){

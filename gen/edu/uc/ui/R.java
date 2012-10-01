@@ -21,22 +21,23 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int FrameLayout1=0x7f090004;
-        public static final int RelativeLayout1=0x7f090006;
-        public static final int btnskiptutorial=0x7f090005;
-        public static final int btnstartgpstracking=0x7f09000c;
-        public static final int btnstoptracking=0x7f090001;
-        public static final int btnviewresults=0x7f09000b;
-        public static final int chronometer1=0x7f09000a;
-        public static final int lblcurrentlytracking=0x7f090007;
-        public static final int lblgpscoordinate1=0x7f090002;
-        public static final int lblgpscoordinate2=0x7f090003;
-        public static final int lbllat=0x7f09000d;
-        public static final int lbllong=0x7f09000e;
-        public static final int lblstarttime=0x7f090009;
-        public static final int lblstoptime=0x7f090008;
-        public static final int lblstoptracking=0x7f09000f;
-        public static final int menu_settings=0x7f090010;
+        public static final int FrameLayout1=0x7f090005;
+        public static final int RelativeLayout1=0x7f090007;
+        public static final int btnskiptutorial=0x7f090006;
+        public static final int btnstartgpstracking=0x7f09000d;
+        public static final int btnstoptracking=0x7f090002;
+        public static final int btnviewresults=0x7f09000c;
+        public static final int chronometer1=0x7f09000b;
+        public static final int lblcurrentlytracking=0x7f090008;
+        public static final int lblgpscoordinate1=0x7f090003;
+        public static final int lblgpscoordinate2=0x7f090004;
+        public static final int lbllat=0x7f09000e;
+        public static final int lbllong=0x7f09000f;
+        public static final int lblstarttime=0x7f09000a;
+        public static final int lblstoptime=0x7f090009;
+        public static final int lblstoptracking=0x7f090010;
+        public static final int listView=0x7f090001;
+        public static final int menu_settings=0x7f090011;
         public static final int textView1=0x7f090000;
     }
     public static final class layout {
