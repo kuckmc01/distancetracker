@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Date;
 import edu.uc.service.GPSServiceStub;
+import edu.uc.service.IGPSService;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
@@ -37,7 +38,7 @@ public class StartGPSActivity extends Activity {
 	Chronometer timer;
 	DateFormat formattedTime;
 	DateFormat formattedDate;
-	GPSServiceStub service; 
+	IGPSService service; 
 
 	private int gpsInterval = 15;
 
