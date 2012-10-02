@@ -1,13 +1,14 @@
 package edu.uc.ui;
 
 import edu.uc.service.GPSServiceStub;
+import edu.uc.service.IGPSService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
 public class ResultsActivity extends Activity {
 
-	GPSServiceStub service; 
+	IGPSService service; 
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
