@@ -2,7 +2,7 @@ package edu.uc.service;
 
 import java.util.Date;
 
-import edu.uc.dto.Distance;
+
 
 
 public interface IGPSService  {
@@ -15,7 +15,7 @@ public interface IGPSService  {
 	 * @param latitude the latitude coordinate
 	 * @param longitude the longitude coordinate
 	 */
-	public void saveCoordinates(String currentTime, double latitude, double  longitude);
+	public void saveCoordinates(Date currentTime, double latitude, double  longitude);
 	
 	/**
 	 * Saves the start time into the distance object

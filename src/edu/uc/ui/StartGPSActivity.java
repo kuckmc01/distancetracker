@@ -30,7 +30,7 @@ public class StartGPSActivity extends Activity {
 	private String startTime;
 	private String endTime;
 	private String todaysDate;
-	private String currentTime;
+	private Date currentTime;
 
 	LocationManager locationManager;
 	LocationListener locationListener;
@@ -175,10 +175,11 @@ public class StartGPSActivity extends Activity {
 			public void onLocationChanged(Location location) {
 				latitude = location.getLatitude();
 				longitude = location.getLongitude();
+				
 
 				lblLat.setText("lat: " + latitude);
 				lblLong.setText("long: " + longitude);
-				currentTime = formattedTime.format(new Date());
+				currentTime = new Date();
 				service.saveCoordinates(currentTime, latitude, longitude);
 				Toast.makeText(StartGPSActivity.this, "lat: " + latitude + " lng: " + longitude, Toast.LENGTH_LONG).show();
 
