@@ -1,17 +1,18 @@
 package edu.uc.service;
 
+
 import java.util.Date;
-import java.util.LinkedHashMap;
 import edu.uc.dao.GPSDAOStub;
 import edu.uc.dao.IGPSDAO;
-import edu.uc.dto.*;
+import edu.uc.dto.Coordinates;
+import edu.uc.dto.Distance;
+
 
 
 public class GPSServiceStub implements IGPSService {
 
 	IGPSDAO gpspersist = new GPSDAOStub();
 	Distance newDistance = new Distance();
-	LinkedHashMap<String, Coordinates> coordinatesLHM = new LinkedHashMap<String, Coordinates>(); 
 	Coordinates coordinates = new Coordinates();
 
 	public void saveStartTime(String startTime) {
@@ -26,27 +27,29 @@ public class GPSServiceStub implements IGPSService {
 		newDistance.setTodaysDate(todaysDate);
 	}
 
-	public void saveCoordinates(String currentTime, double longitude,
-			double latitude) {
-		if(String.valueOf(latitude).length() != 0 || String.valueOf(latitude) != null ||
-		   String.valueOf(longitude).length() != 0	|| String.valueOf(longitude) != null )
-		{
-			coordinates.setLatitude(latitude);
-			coordinates.setLongitude(longitude);
-			coordinatesLHM.put(currentTime, coordinates);
-			newDistance.setDistanceCoordinates(coordinatesLHM);		
-		}
-	}
-
-	public void saveDistanceObject() {
-		// TODO Auto-generated method stub
-		//is the cooridnatesLHM null ???? if so do not save to database
-		gpspersist.persistDistanceObject(newDistance);
-		
-	}
 	public boolean trackingStatus() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void saveCoordinates(Date currentTime, double latitude,
+			double longitude) {
+		// TODO Auto-generated method stub
+		if(String.valueOf(latitude) != null && String.valueOf(longitude) != null &&
+				String.valueOf(latitude).length() != 0 && String.valueOf(longitude).length() != 0	  )
+			{
+				coordinates.setLatitude(latitude);
+				coordinates.setLongitude(longitude);
+				coordinates.setCurrentTime(currentTime);
+				newDistance.setDistanceCoordinates(coordinates);		
+			}
+	}
+
+	public void saveDistanceObject() {
+		gpspersist.persistDistanceObject(newDistance);
+		
+	}
+
+
 
 }

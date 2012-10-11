@@ -17,7 +17,7 @@ public class GPSDAOStub implements IGPSDAO {
 
 	public Distance fetchDistanceObject(String key_StartTime) throws Exception {
 
-		if(key_StartTime.length() == 0 || key_StartTime != null)
+		if(key_StartTime != null && key_StartTime.length() == 0)
 		{
 			if(distanceHashMap.containsKey(key_StartTime))
 			{
@@ -39,6 +39,7 @@ public class GPSDAOStub implements IGPSDAO {
 		// TODO Auto-generated method stub
 		String startTime = distanceObject.getStartTime();
 		distanceHashMap.put(startTime, distanceObject);
+		HashMap<String, Distance> hamster = distanceHashMap;
 		
 	}
 

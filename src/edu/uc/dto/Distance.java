@@ -1,7 +1,7 @@
 package edu.uc.dto;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+
 
 public class Distance {
 
@@ -9,7 +9,8 @@ public class Distance {
 	private String startTime;
 	private String endTime;
 	private String todaysDate;
-	private LinkedHashMap<String, Coordinates> distanceCoordinates;
+	
+	private ArrayList<Coordinates> distanceCoordinates = new ArrayList<Coordinates>();
 	
 	public void setStartTime(String startTime){
 		this.startTime = startTime;	
@@ -29,11 +30,12 @@ public class Distance {
 	public String getTodaysDate(){
 		return todaysDate;
 	}
-	public LinkedHashMap<String, Coordinates> getDistanceCoordinates() {
+	public ArrayList<Coordinates> getDistanceCoordinates() {
 		return distanceCoordinates;
 	}
-	public void setDistanceCoordinates(LinkedHashMap<String, Coordinates> distanceCoordinates) {
-		this.distanceCoordinates = distanceCoordinates;
+	public void setDistanceCoordinates(Coordinates theCoordinates) {
+		distanceCoordinates.add(theCoordinates);
 	}
+
 
 }
