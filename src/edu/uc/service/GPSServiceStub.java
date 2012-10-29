@@ -6,10 +6,15 @@ import edu.uc.dao.GPSDAOStub;
 import edu.uc.dao.IGPSDAO;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
-
-
+import edu.uc.dao.GPSDAODatabase;
+import edu.uc.dao.GPSDAOStub;
+import edu.uc.dao.GPSDAOStub;
+import edu.uc.dao.GPSDAOStub;
+import edu.uc.dao.GPSDAOStub;
+import edu.uc.dao.GPSDAOStub;
 
 public class GPSServiceStub implements IGPSService {
+	GPSDAODatabase dao;
 
 	IGPSDAO gpspersist = new GPSDAOStub();
 	Distance newDistance = new Distance();
@@ -41,7 +46,10 @@ public class GPSServiceStub implements IGPSService {
 				coordinates.setLatitude(latitude);
 				coordinates.setLongitude(longitude);
 				coordinates.setCurrentTime(currentTime);
-				newDistance.setDistanceCoordinates(coordinates);		
+				newDistance.setDistanceCoordinates(coordinates);	
+				
+				//part that will store in database clk
+				//dao.saveCoordinatesdatabase(coordinates);
 			}
 	}
 
