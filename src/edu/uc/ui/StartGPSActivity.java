@@ -25,6 +25,7 @@ import android.widget.Toast;
 public class StartGPSActivity extends Activity {
 
 	private static final String tag = "StartGPSActivity";
+	private static final String DEBUG_TAG = "DTrackerLogging";
 	private double latitude;
 	private double longitude;
 	private String startTime;
@@ -67,7 +68,9 @@ public class StartGPSActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.startgpsactivity);
-
+        
+		 Log.i(DEBUG_TAG, "Info about the onCreate method in the StartGPSActivity."); 
+		 
 		btnStartGPSTracking = (Button) findViewById(R.id.btnstartgpstracking);
 		btnStopGPSTracking = (Button) findViewById(R.id.btnstoptracking);
 		btnViewResults = (Button) findViewById(R.id.btnviewresults);
@@ -83,8 +86,7 @@ public class StartGPSActivity extends Activity {
 		formattedDate = new SimpleDateFormat("yyyy/MM/dd");
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		initLocationListener();
-
-
+		
 /** TODO:
  * The button starts gps tracking
  * need to save the following items to the DATABASE through the service layer and persistence layer:
@@ -99,6 +101,7 @@ public class StartGPSActivity extends Activity {
 				service.saveTodaysDate(todaysDate);
 				
 				requestUpdates();
+				 Log.i(DEBUG_TAG, "Info about the btnSartGPSTracking in the StartGPSActivity."); 
 				if(currentState == state2)
 				{
 					
@@ -163,7 +166,7 @@ public class StartGPSActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ResultsActivity.class);
 				startActivityForResult(intent, 0);
-				
+				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");	
 			}
 		});
 	}
