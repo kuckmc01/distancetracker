@@ -5,10 +5,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 public class GPSLocation extends Activity {
-
+	private static final String DEBUG_TAG = "DTrackerLogging";
 	private double latitude;
 	private double longitude;
 
@@ -24,6 +25,7 @@ public class GPSLocation extends Activity {
 		super.onCreate(savedInstanceState);
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		initLocationListener();
+		 Log.i(DEBUG_TAG, "Info about the oncreate method in the GPSLocation."); 
 	}
 	private void initLocationListener(){
 		locationListener = new LocationListener(){
