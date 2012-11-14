@@ -27,7 +27,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		private static final String Coordinates_Save = "Coordinates_Save";
 		private static final String latitude = "latitude";
 		private static final String longitude = "longitude";
-		private static final String date = "date";
+		private static final String dates = "dates";
 		static final String coID = "_id";
 		//creating database
 		
@@ -49,8 +49,8 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		
 		values.put(latitude, coordinates.getLatitude());
 		values.put(longitude, coordinates.getLongitude());
-		values.put(date,coordinates.getCurrentTime().toString());
-			getWritableDatabase().insert(Coordinates_Save, date, values);
+		values.put(dates,coordinates.getCurrentTime().toString());
+			getWritableDatabase().insert(Coordinates_Save, dates, values);
 			getWritableDatabase().insert(Coordinates_Save, longitude, values);
 			getWritableDatabase().insert(Coordinates_Save, latitude, values);
 			
@@ -61,7 +61,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		public android.database.Cursor Cursor()
 		{
 			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "longitude",
-	  		  "latitude" }, null, null, null,null, null);    
+	  		  "latitude", "dates" }, null, null, null,null, null);    
 			cursor.moveToLast();
 			DatabaseUtils.dumpCurrentRow(cursor);
 			return cursor;
