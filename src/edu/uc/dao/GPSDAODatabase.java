@@ -5,10 +5,14 @@ import java.util.HashMap;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
+import edu.uc.service.GPSServiceStub;
 
 /*
  * The goal of this class is to store the coordinates and time into
@@ -20,42 +24,49 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 
  {
 	
-	 
-		public GPSDAODatabase(Context context, String trackresults ) {
-		super(context, trackresults, null, 0);
-		// TODO Auto-generated constructor stub
-	}
-		private static final String Coordinates_Table = "coordinates";
-		private static final String lattitude = "lattitude";
+		private static final String Coordinates_Save = "Coordinates_Save";
+		private static final String latitude = "latitude";
 		private static final String longitude = "longitude";
 		private static final String date = "date";
-		static final String coID = "coID";
+		static final String coID = "_id";
 		//creating database
+		
+		public GPSDAODatabase(Context context ) {
+			super(context, "Coordinates_Save", null, 1 );
+		}
+		@Override
 		public void onCreate(SQLiteDatabase db) {
-			// TODO Auto-generated method stub
-			// TODO Auto-generated method stub
-			db.execSQL("CREATE TABLE "+Coordinates_Table+" (_id INTEGER PRIMARY KEY AUTOINCREMENT, " + coID + " INT, "+ lattitude + " INT, "+longitude + " INT" + date + " date;");
 
-
+		String createTableStatement = "CREATE TABLE Coordinates_Save (_id INTEGER PRIMARY KEY AUTOINCREMENT, coID INT, latitude  DOUBLE, longitude DOUBLE,  dates date);";
+		
+			db.execSQL(createTableStatement);
 		}
 		//saving the coordinates
-		public void saveCoordinatesdatabase(Coordinates coordinates)
+		
+		public void saveCoordinatesdatabase(Coordinates coordinates) throws Exception
 		{
-			ContentValues values = new ContentValues();
-			values.put(coID, "1");
-			values.put(lattitude, coordinates.getLatitude());
-			values.put(longitude, coordinates.getLongitude());
-			values.put(date,coordinates.getCurrentTime().toString());
-			getWritableDatabase().insert(Coordinates_Table, coID, values);
-			getWritableDatabase().insert(Coordinates_Table, date, values);
-			getWritableDatabase().insert(Coordinates_Table, longitude, values);
-			getWritableDatabase().insert(Coordinates_Table, lattitude, values);
+		ContentValues values = new ContentValues();
+		
+		values.put(latitude, coordinates.getLatitude());
+		values.put(longitude, coordinates.getLongitude());
+		values.put(date,coordinates.getCurrentTime().toString());
+			getWritableDatabase().insert(Coordinates_Save, date, values);
+			getWritableDatabase().insert(Coordinates_Save, longitude, values);
+			getWritableDatabase().insert(Coordinates_Save, latitude, values);
 			
-
-			}
+				 
+		Cursor();
 		
+		}
+		public android.database.Cursor Cursor()
+		{
+			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "longitude",
+	  		  "latitude" }, null, null, null,null, null);    
+			cursor.moveToLast();
+			DatabaseUtils.dumpCurrentRow(cursor);
+			return cursor;
+		}
 		
-
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub
