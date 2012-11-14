@@ -3,9 +3,12 @@ package edu.uc.ui;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Date;
+
+import edu.uc.dao.GPSDAODatabase;
 import edu.uc.service.GPSServiceStub;
 import edu.uc.service.IGPSService;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -42,6 +45,7 @@ public class StartGPSActivity extends Activity {
 	IGPSService service; 
 
 	private int gpsInterval = 15;
+	private GPSDAODatabase dao;
 
 	protected Button btnStartGPSTracking;
 	protected Button btnStopGPSTracking;
@@ -85,6 +89,7 @@ public class StartGPSActivity extends Activity {
 		formattedTime = new SimpleDateFormat("hh:mm:ss");
 		formattedDate = new SimpleDateFormat("yyyy/MM/dd");
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		dao = new GPSDAODatabase(this);
 		initLocationListener();
 		
 /** TODO:
@@ -183,9 +188,8 @@ public class StartGPSActivity extends Activity {
 				lblLat.setText("lat: " + latitude);
 				lblLong.setText("long: " + longitude);
 				currentTime = new Date();
-				service.saveCoordinates(currentTime, latitude, longitude);
+				service.saveCoordinates(currentTime, latitude, longitude, dao);
 				Toast.makeText(StartGPSActivity.this, "lat: " + latitude + " lng: " + longitude, Toast.LENGTH_LONG).show();
-
 			}
 
 			public void onProviderDisabled(String provider) {
