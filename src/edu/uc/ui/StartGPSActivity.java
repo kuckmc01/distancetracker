@@ -175,10 +175,10 @@ public class StartGPSActivity extends Activity {
 		btnViewResults.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
+				Intent intent = new Intent(v.getContext(), ResultsActivity.class);
 				startActivityForResult(intent, 0);
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
-				 Calculations.calc(dao);
+			Calculations.calc(dao);
 			}
 		});
 	}
@@ -195,7 +195,7 @@ public class StartGPSActivity extends Activity {
 				lblLat.setText("lat: " + latitude);
 				lblLong.setText("long: " + longitude);
 				currentTime = new Date();
-				service.saveCoordinates(currentTime, latitude, longitude, dao);
+				service.saveCoordinates(currentTime, latitude, longitude, dao, tripid);
 				Toast.makeText(StartGPSActivity.this, "lat: " + latitude + " lng: " + longitude, Toast.LENGTH_LONG).show();
 			}
 
@@ -240,6 +240,7 @@ public class StartGPSActivity extends Activity {
 	 */
 	protected void requestUpdates(){
 		if(locationListener != null  && locationManager != null){
+			service.saveCoordinates(currentTime, latitude, longitude, dao, tripid);
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval * 1000, 0, locationListener);
 			//Toast.makeText(context, text, duration)
 

@@ -17,7 +17,7 @@ public interface IGPSService  {
 	 * @param latitude the latitude coordinate
 	 * @param longitude the longitude coordinate
 	 */
-	public void saveCoordinates(Date currentTime, double latitude, double  longitude, GPSDAODatabase dao);
+	public void saveCoordinates(Date currentTime, double latitude, double  longitude, GPSDAODatabase dao, double tripid);
 	
 	/**
 	 * Saves the start time into the distance object

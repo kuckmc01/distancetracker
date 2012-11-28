@@ -46,7 +46,7 @@ public class GPSServiceStub implements IGPSService {
 	}
 
 	public void saveCoordinates(Date currentTime, double latitude,
-			double longitude, GPSDAODatabase dao) {
+			double longitude, GPSDAODatabase dao, double tripid) {
 		if(String.valueOf(latitude) != null && String.valueOf(longitude) != null &&
 				String.valueOf(latitude).length() != 0 && String.valueOf(longitude).length() != 0	  )
 			{
