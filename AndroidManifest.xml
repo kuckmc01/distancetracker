@@ -37,7 +37,6 @@
             android:name=".ResultsActivity"
             android:label="@string/title_activity_results" >
         </activity>
-        <uses-library android:name="com.google.android.maps"/>
         <activity android:name=".DistanceTrackerMap" android:label="@string/app_name"
      android:theme="@android:style/Theme.NoTitleBar">
             </activity>

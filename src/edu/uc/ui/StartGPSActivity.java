@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import edu.uc.dao.GPSDAODatabase;
+import edu.uc.service.Calculations;
 import edu.uc.service.GPSServiceStub;
 import edu.uc.service.IGPSService;
 import android.app.Activity;
@@ -46,7 +47,8 @@ public class StartGPSActivity extends Activity {
 
 	private int gpsInterval = 15;
 	private GPSDAODatabase dao;
-
+	
+	public double tripid;
 	protected Button btnStartGPSTracking;
 	protected Button btnStopGPSTracking;
 	protected Button btnViewResults;
@@ -151,6 +153,10 @@ public class StartGPSActivity extends Activity {
 				if(currentState == state1)
 				{
 					timer.stop();
+					
+					tripid = dao.CursorTripID() + 1 ;
+					System.out.println("The trip id is " + tripid);
+
 					currentState = state2;
 					changeVisibility(btnStopGPSTracking);
 					changeVisibility(btnStartGPSTracking);
@@ -171,7 +177,8 @@ public class StartGPSActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
 				startActivityForResult(intent, 0);
-				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");	
+				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
+				 Calculations.calc(dao);
 			}
 		});
 	}

@@ -7,7 +7,7 @@ public class Coordinates {
 	private Date currentTime;
 	private double latitude;
 	private double longitude;
-	
+	private double tripid;
 	
 	public Coordinates(Date t, double x, double y)
 	{
@@ -35,6 +35,9 @@ public class Coordinates {
 	public String toString(){
 		return "( " + getCurrentTime() + ", " + getLatitude() + ", " + getLongitude() + ")";
 	}
+	public void setCurrentTrip(double tripid){
+		this.tripid = tripid;
+	}
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
@@ -43,7 +46,10 @@ public class Coordinates {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
+	public double getCurrentTrip(){
+		return tripid;
+		}
+	
 	public void setCurrentTime(Date currentTime) {
 		this.currentTime = currentTime;
 	}
