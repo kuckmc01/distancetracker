@@ -67,6 +67,7 @@ public final class R {
         public static final int lblstarttime=0x7f060010;
         public static final int lblstoptime=0x7f060011;
         public static final int lbltracking_stopped=0x7f06000d;
+        public static final int map=0x7f060014;
         public static final int menu_settings=0x7f060002;
         public static final int skip_tutorial=0x7f060005;
         public static final int start_tracking=0x7f060006;
