@@ -9,11 +9,12 @@ public class Coordinates {
 	private double longitude;
 	private double tripid;
 	
-	public Coordinates(Date t, double x, double y)
+	public Coordinates(Date t, double x, double y, double tripid)
 	{
 				setCurrentTime(t);
 				setLatitude(x);
 				setLongitude(y);
+				setCurrentTrip(tripid);
 	}
 	
 	public Coordinates() {

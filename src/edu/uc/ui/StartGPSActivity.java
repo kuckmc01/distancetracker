@@ -48,7 +48,6 @@ public class StartGPSActivity extends Activity {
 	private int gpsInterval = 15;
 	private GPSDAODatabase dao;
 	
-	public double tripid;
 	protected Button btnStartGPSTracking;
 	protected Button btnStopGPSTracking;
 	protected Button btnViewResults;
@@ -68,6 +67,7 @@ public class StartGPSActivity extends Activity {
 	protected int state2 = 2;
 	protected int state3 = 3;
 	protected int state4 = 4;
+	public double tripid ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +108,9 @@ public class StartGPSActivity extends Activity {
 				service.saveTodaysDate(todaysDate);
 				
 				requestUpdates();
+
+				tripid = dao.CursorTripID() + 1;
+				System.out.println("The trip id is " + tripid);
 				 Log.i(DEBUG_TAG, "Info about the btnSartGPSTracking in the StartGPSActivity."); 
 				if(currentState == state2)
 				{
@@ -154,8 +157,6 @@ public class StartGPSActivity extends Activity {
 				{
 					timer.stop();
 					
-					tripid = dao.CursorTripID() + 1 ;
-					System.out.println("The trip id is " + tripid);
 
 					currentState = state2;
 					changeVisibility(btnStopGPSTracking);
@@ -173,13 +174,12 @@ public class StartGPSActivity extends Activity {
 			}
 		});
 		btnViewResults.setOnClickListener(new OnClickListener() {
-			
 			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), ResultsActivity.class);
-				startActivityForResult(intent, 0);
-				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
+			Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
+			startActivityForResult(intent, 0);
 			Calculations.calc(dao);
-			}
+		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity."); 
+		 }
 		});
 	}
 
@@ -190,11 +190,13 @@ public class StartGPSActivity extends Activity {
 			public void onLocationChanged(Location location) {
 				latitude = location.getLatitude();
 				longitude = location.getLongitude();
-				
+				 
 
 				lblLat.setText("lat: " + latitude);
 				lblLong.setText("long: " + longitude);
 				currentTime = new Date();
+				System.out.println("The trip id is " + tripid);
+				
 				service.saveCoordinates(currentTime, latitude, longitude, dao, tripid);
 				Toast.makeText(StartGPSActivity.this, "lat: " + latitude + " lng: " + longitude, Toast.LENGTH_LONG).show();
 			}
@@ -241,6 +243,7 @@ public class StartGPSActivity extends Activity {
 	protected void requestUpdates(){
 		if(locationListener != null  && locationManager != null){
 			service.saveCoordinates(currentTime, latitude, longitude, dao, tripid);
+			
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval * 1000, 0, locationListener);
 			//Toast.makeText(context, text, duration)
 

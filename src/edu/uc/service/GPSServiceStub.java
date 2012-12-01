@@ -50,10 +50,11 @@ public class GPSServiceStub implements IGPSService {
 		if(String.valueOf(latitude) != null && String.valueOf(longitude) != null &&
 				String.valueOf(latitude).length() != 0 && String.valueOf(longitude).length() != 0	  )
 			{
-			Coordinates coordinates = new Coordinates();
-				coordinates.setLatitude(latitude);
-				coordinates.setLongitude(longitude);
-				coordinates.setCurrentTime(currentTime);
+			Coordinates coordinates = new Coordinates(currentTime, latitude, longitude, tripid);
+			//	coordinates.setLatitude(latitude);
+			// coordinates.setLongitude(longitude);
+			//	coordinates.setCurrentTime(currentTime);
+			//coordinates.setCurrentTrip(tripid);
 				newDistance.setDistanceCoordinates(coordinates);
 				
 				try {
