@@ -20,5 +20,6 @@
     <string name="lblstoptime">Time Stopped:</string>
     <string name="chronometer">Chronometer</string>
     <string name="btnviewresults">View Results</string>
+    <string name="map">map</string>
 
 </resources>
