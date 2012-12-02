@@ -1,7 +1,12 @@
 package edu.uc.dao;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -77,13 +82,54 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			
 			cursor.moveToLast();
 			System.out.println(Double.valueOf(cursor.getString(1)));
+					
 			 return Double.valueOf(cursor.getString(1));
 			
 			
 	}
 			
+
+	public List<Coordinates> CursorForMap()
+	{
 		
+		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 2", null);
+		List<Coordinates> coordinatesList = new ArrayList<Coordinates>();
 		
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast())
+		{
+			Coordinates coordinate = new Coordinates();
+
+			coordinate.setLatitude(Double.valueOf(cursor.getString(3)));
+			coordinate.setLongitude(Double.valueOf(cursor.getString(4)));
+			DateFormat formatter;
+			
+			
+			formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+			
+			String thing = cursor.getString(5);
+			
+			
+			
+			Date date;
+			try {
+				date = (Date)formatter.parse(thing);
+				coordinate.setCurrentTime(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			coordinatesList.add(coordinate);
+			 cursor.moveToNext();
+		}
+		
+		 return coordinatesList;
+	}
+			
+
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub

@@ -181,6 +181,8 @@ public class StartGPSActivity extends Activity {
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
 
 			Calculations.calc(dao);
+			dao.CursorForMap();
+			
 		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity."); 
 		 }
 		});
