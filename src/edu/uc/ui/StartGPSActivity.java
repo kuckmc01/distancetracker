@@ -175,14 +175,11 @@ public class StartGPSActivity extends Activity {
 		});
 		btnViewResults.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-<<<<<<< local
-			Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
-			startActivityForResult(intent, 0);
-=======
+
 				Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
 				startActivity(intent);
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
->>>>>>> other
+
 			Calculations.calc(dao);
 		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity."); 
 		 }
