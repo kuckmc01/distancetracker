@@ -84,7 +84,9 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			
 
 			cursor.moveToLast();
-			
+			if(cursor.getPosition() == -1){
+				return 0.0;
+			}
 			System.out.println(Double.valueOf(cursor.getString(1)));
 			
 			

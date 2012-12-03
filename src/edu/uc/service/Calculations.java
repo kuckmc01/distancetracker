@@ -28,11 +28,11 @@ public  class Calculations  {
 		double latitude2;
 		double longitude2;
 		myCursor.moveToLast();
-		 String time2 = myCursor.getString(6);	
+		 String time2 = myCursor.getString(5);	
 		myCursor.moveToFirst();
 		 latitude1 = Double.valueOf(myCursor.getString(2)) ;
 		 longitude1 = Double.valueOf(myCursor.getString(1)) ;
-		 String time1 = myCursor.getString(6);
+		 String time1 = myCursor.getString(5);
 		 
 		 double totaltotal = 0 ;
 		while (!myCursor.isAfterLast())

@@ -33,8 +33,8 @@ public class DistanceTrackerMap extends MapActivity {
 
 	    
 	    List<Coordinates> points = dao.CursorForMap();
-	    points.size(); 
-	    for (int i = 0; i < points.size();)
+	    //points.size(); 
+	    for (int i = 0; i < points.size();i++)
 	    {
 	    int testlat =  (int) dao.CursorForMap().get(i).getLatitude();
 	    int testlong =  (int) dao.CursorForMap().get(i).getLongitude();
@@ -44,7 +44,7 @@ public class DistanceTrackerMap extends MapActivity {
 		itemizedoverlay.addOverlay(overlayitem);
 		mapOverlays.add(itemizedoverlay);
 
-	    i++;
+	    
 	    }
 	    //GeoPoint point = new GeoPoint(latitude,longitude);
 		//OverlayItem overlayitem = new OverlayItem(point, ""+ latitude ,""+ longitude);
