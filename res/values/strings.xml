@@ -22,5 +22,6 @@
     <string name="btnviewresults">View Results</string>
     <string name="btnselecttrip">Click here to Select trip</string>
     <string name="map">map</string>
+    <string name="MapButton">View Map</string>
 
 </resources>
