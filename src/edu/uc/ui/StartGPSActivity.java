@@ -108,7 +108,6 @@ public class StartGPSActivity extends Activity {
 				requestUpdates();
 				
 				tripid = dao.CursorTripID() + 1;
-				System.out.println("The trip id is " + tripid);
 				 Log.i(DEBUG_TAG, "Info about the btnSartGPSTracking in the StartGPSActivity."); 
 				if(currentState == state2)
 				{
@@ -141,11 +140,7 @@ public class StartGPSActivity extends Activity {
 		});
 		
 		
-		/**TODO:
-		 * need to save the following items to the DATABASE through the service layer and persistence layer:
-		 * -ending coordinates
-		 * -ending time
-		 */
+	
 		btnStopGPSTracking.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -180,7 +175,7 @@ public class StartGPSActivity extends Activity {
 				startActivity(intent);
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
 
-			Calculations.calc(dao);
+			
 			Calculations.time(dao);
 			
 

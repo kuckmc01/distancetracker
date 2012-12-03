@@ -21,15 +21,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/MapButton" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_above="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout="@+id/textView1" >
-    </ListView>
-
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="fill_parent"
@@ -37,5 +28,25 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="21dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_marginBottom="73dp"
+        android:layout_toLeftOf="@+id/textView1"
+        android:text="@string/timetraveled"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/miles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/time"
+        android:layout_alignLeft="@+id/time"
+        android:layout_marginBottom="24dp"
+        android:text="@string/milestraveled"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

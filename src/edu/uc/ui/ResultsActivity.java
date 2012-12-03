@@ -16,11 +16,16 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ResultsActivity extends Activity {
 	private GPSDAODatabase dao;
 	protected Button btnMapResults;
-	IGPSService service; 
+	protected TextView lblmiles;
+	protected TextView lbltime;
+	IGPSService service;
+	
+
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,21 @@ public class ResultsActivity extends Activity {
         btnMapResults = (Button) findViewById(R.id.button1);
         service = new GPSServiceStub();
         dao = new GPSDAODatabase(this);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+        lblmiles = (TextView) findViewById(R.id.miles);
+    	lbltime = (TextView) findViewById(R.id.time);
+    	double miles = Calculations.calc(dao);
+    	double time = Calculations.time(dao);
+    	lblmiles.setText("Miles Traveled: " + miles);
+        lbltime.setText("Time Traveled: " + time);
         
-        
+       
         btnMapResults.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 
 				Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
 				startActivity(intent);
+				System.out.println(spinner.getSelectedItem().toString());
 		 }
 		});
         

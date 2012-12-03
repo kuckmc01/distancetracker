@@ -20,6 +20,8 @@
     <string name="lblstoptime">Time Stopped:</string>
     <string name="chronometer">Chronometer</string>
     <string name="btnviewresults">View Results</string>
+     <string name= "milestraveled"> Miles Traveled</string>
+    <string name= "timetraveled"> Time Traveled</string>
     <string name="btnselecttrip">Click here to Select trip</string>
     <string name="map">map</string>
     <string name="MapButton">View Map</string>
