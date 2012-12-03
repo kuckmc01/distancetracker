@@ -62,10 +62,11 @@ public final class R {
         public static final int activity_stop_tracking_gps=0x7f080002;
     }
     public static final class string {
-        public static final int MapButton=0x7f06001a;
+        public static final int Back=0x7f060018;
+        public static final int MapButton=0x7f06001b;
         public static final int app_name=0x7f060000;
         public static final int btn_skip_tutorial=0x7f06000c;
-        public static final int btnselecttrip=0x7f060018;
+        public static final int btnselecttrip=0x7f060019;
         public static final int btnviewresults=0x7f060013;
         public static final int calculate=0x7f060016;
         public static final int chronometer=0x7f060012;
@@ -76,7 +77,7 @@ public final class R {
         public static final int lblstarttime=0x7f060010;
         public static final int lblstoptime=0x7f060011;
         public static final int lbltracking_stopped=0x7f06000d;
-        public static final int map=0x7f060019;
+        public static final int map=0x7f06001a;
         public static final int menu_settings=0x7f060002;
         public static final int milestraveled=0x7f060014;
         public static final int skip_tutorial=0x7f060005;

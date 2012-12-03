@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class ResultsActivity extends Activity {
 	private GPSDAODatabase dao;
 	protected Button btnMapResults;
+	protected Button btnBack;
 	protected Button btnCalculate;
 	protected TextView lblmiles;
 	protected TextView lbltime;
@@ -35,6 +36,7 @@ public class ResultsActivity extends Activity {
         setContentView(R.layout.activity_results);
         btnMapResults = (Button) findViewById(R.id.button1);
         btnCalculate = (Button) findViewById(R.id.button2);
+        btnBack = (Button) findViewById(R.id.button3);
         service = new GPSServiceStub();
         dao = new GPSDAODatabase(this);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -52,6 +54,15 @@ public class ResultsActivity extends Activity {
 				Intent intent = new Intent(v.getContext(), DistanceTrackerMap.class);
 				startActivity(intent);
 				System.out.println(spinner.getSelectedItem().toString());
+		 }
+		});
+        
+
+        btnBack.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+
+			finish();
+				
 		 }
 		});
         
