@@ -72,7 +72,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		public android.database.Cursor Cursor()
 		{
 			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"latitude",
-	  		  "longitude", "dates" }, "tripID = 2", null, null,null, null);    
+	  		  "longitude", "dates" }, "tripID = 1.0", null, null,null, null);    
 			
 			return cursor;
 		}
