@@ -49,7 +49,6 @@ public  class Calculations  {
 				    TimeUnit.MILLISECONDS.toSeconds(totaltime) - 
 				    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totaltime)));
 			
-			System.out.println("total" + totaltime);
 		
 			return test;
 
