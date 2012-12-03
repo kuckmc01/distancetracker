@@ -24,6 +24,7 @@
     <string name= "tripidselect"> Select a TripID</string>
     <string name= "calculate">Calculate</string>
     <string name= "timetraveled"> Time Traveled</string>
+    <string name= "Back"> Back</string>
     <string name="btnselecttrip">Click here to Select trip</string>
     <string name="map">map</string>
     <string name="MapButton">View Map</string>
