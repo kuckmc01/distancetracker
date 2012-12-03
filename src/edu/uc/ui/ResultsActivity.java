@@ -21,10 +21,12 @@ import android.widget.TextView;
 public class ResultsActivity extends Activity {
 	private GPSDAODatabase dao;
 	protected Button btnMapResults;
+	protected Button btnCalculate;
 	protected TextView lblmiles;
 	protected TextView lbltime;
 	IGPSService service;
-	
+	 static String spinnervalue = null;
+    
 
 	
     @Override
@@ -32,6 +34,7 @@ public class ResultsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         btnMapResults = (Button) findViewById(R.id.button1);
+        btnCalculate = (Button) findViewById(R.id.button2);
         service = new GPSServiceStub();
         dao = new GPSDAODatabase(this);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -52,8 +55,30 @@ public class ResultsActivity extends Activity {
 		 }
 		});
         
+        btnCalculate.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+
+				System.out.println(spinner.getSelectedItem().toString());
+				spinnervalue =  spinner.getSelectedItem().toString();
+				
+				double miles = Calculations.calc(dao);
+		    	double time = Calculations.time(dao);
+				lblmiles.setText("Miles Traveled: " + miles);
+		        lbltime.setText("Time Traveled: " + time);
+		        
+		 }
+		});
+        
+       
+        
         spinnerpopulate();
     }
+    
+    public static String spinnerSet() {
+		
+		return spinnervalue;
+        
+	}
     public void spinnerpopulate() {
 
 	//setContentView (R.layout.activity_results);
