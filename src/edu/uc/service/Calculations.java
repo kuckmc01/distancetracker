@@ -15,7 +15,7 @@ public  class Calculations  {
 	/* This calculates the time and subtracts the start from final.
 	 * The date is in milliseconds since 1970 (Epoch time) so we have to divide by 360000 to get hours....
 	 */
-	public static void time(GPSDAODatabase dao)
+	public static double time(GPSDAODatabase dao)
 	
 	{
 		Cursor myCursor = dao.Cursor(); 
@@ -41,13 +41,14 @@ public  class Calculations  {
 			long milliseconds2= date2.getTime();
 
 			System.out.println("milli2" + milliseconds2);
-			float  totaltime = (milliseconds2 - milliseconds1) / 3600000;
-			System.out.println("The total time was:" + totaltime);
+			double  totaltime = (milliseconds2 - milliseconds1) / 3600000;
+			return totaltime;
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 123;
 		
 		
 
@@ -58,7 +59,7 @@ public  class Calculations  {
 	 * This is for calculating the coordinates. We use the distance formula with one slight modification due to earth's curvature
 	 * We have tested our numbers against different websites and it is very close. More detailed calculations could be more exact.
 	 */
-	public static void calc(GPSDAODatabase dao)
+	public static double calc(GPSDAODatabase dao)
 	{
 		
 		Cursor myCursor = dao.Cursor(); 
@@ -93,7 +94,7 @@ public  class Calculations  {
 			 
 				System.out.println("The subtotal distance is " + distancetotal);
 		}	 
-		System.out.println("The total distance is " + totaltotal);
+		 return totaltotal;
 		}
 		
 	}

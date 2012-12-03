@@ -72,7 +72,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		public android.database.Cursor Cursor()
 		{
 			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"latitude",
-	  		  "longitude", "dates" }, "tripID = 1.0", null, null,null, null);    
+	  		  "longitude", "dates" }, "tripID = 1", null, null,null, null);    
 			
 			return cursor;
 		}
@@ -123,7 +123,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 	public List<Coordinates> CursorForMap()
 	{
 	
-		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 2", null);
+		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 1", null);
 		List<Coordinates> coordinatesList = new ArrayList<Coordinates>();
 		
 		cursor.moveToFirst();
