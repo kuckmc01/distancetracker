@@ -41,7 +41,7 @@ public class ResultsActivity extends Activity {
         lblmiles = (TextView) findViewById(R.id.miles);
     	lbltime = (TextView) findViewById(R.id.time);
     	double miles = Calculations.calc(dao);
-    	double time = Calculations.time(dao);
+    	String time = Calculations.time(dao);
     	lblmiles.setText("Miles Traveled: " + miles);
         lbltime.setText("Time Traveled: " + time);
         
@@ -62,7 +62,7 @@ public class ResultsActivity extends Activity {
 				spinnervalue =  spinner.getSelectedItem().toString();
 				
 				double miles = Calculations.calc(dao);
-		    	double time = Calculations.time(dao);
+		    	String time = Calculations.time(dao);
 				lblmiles.setText("Miles Traveled: " + miles);
 		        lbltime.setText("Time Traveled: " + time);
 		        

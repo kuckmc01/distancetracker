@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import android.database.Cursor;
 import edu.uc.dao.GPSDAODatabase;
@@ -15,7 +16,7 @@ public  class Calculations  {
 	/* This calculates the time and subtracts the start from final.
 	 * The date is in milliseconds since 1970 (Epoch time) so we have to divide by 360000 to get hours....
 	 */
-	public static double time(GPSDAODatabase dao)
+	public static String time(GPSDAODatabase dao)
 	
 	{
 		Cursor myCursor = dao.Cursor(); 
@@ -37,18 +38,26 @@ public  class Calculations  {
 			date2 = (Date)formatter.parse(time2);
 		
 			long milliseconds1 = date1.getTime();
-			System.out.println("milli1" + milliseconds1);
 			long milliseconds2= date2.getTime();
 
-			System.out.println("milli2" + milliseconds2);
-			double  totaltime = (milliseconds2 - milliseconds1) / 3600000;
-			return totaltime;
+			long  totaltime = (milliseconds2 - milliseconds1);
+			
+			String test = String.format("%02d:%02d:%02d", 
+				    TimeUnit.MILLISECONDS.toHours(totaltime),
+				    TimeUnit.MILLISECONDS.toMinutes(totaltime) - 
+				    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totaltime)),
+				    TimeUnit.MILLISECONDS.toSeconds(totaltime) - 
+				    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totaltime)));
+			
+			System.out.println("total" + totaltime);
+		
+			return test;
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 123;
+		return "123";
 		
 		
 
@@ -92,7 +101,7 @@ public  class Calculations  {
 			
 			 totaltotal = distancetotal + totaltotal;
 			 
-				System.out.println("The subtotal distance is " + distancetotal);
+				
 		}	 
 		 return totaltotal;
 		}
