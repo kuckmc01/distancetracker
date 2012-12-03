@@ -3,28 +3,16 @@ package edu.uc.service;
 
 import java.util.Date;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import edu.uc.dao.GPSDAOStub;
-import edu.uc.dao.IGPSDAO;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
 import edu.uc.dao.GPSDAODatabase;
-import edu.uc.dao.GPSDAOStub;
-import edu.uc.dao.GPSDAOStub;
-import edu.uc.dao.GPSDAOStub;
-import edu.uc.dao.GPSDAOStub;
-import edu.uc.dao.GPSDAOStub;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 
 public class GPSServiceStub implements IGPSService {
 
 	private GPSDAODatabase dao;
-	IGPSDAO gpspersist = new GPSDAOStub();
+
 	Distance newDistance = new Distance();
 	
 	
@@ -51,14 +39,11 @@ public class GPSServiceStub implements IGPSService {
 				String.valueOf(latitude).length() != 0 && String.valueOf(longitude).length() != 0	  )
 			{
 			Coordinates coordinates = new Coordinates(currentTime, latitude, longitude, tripid);
-			//	coordinates.setLatitude(latitude);
-			// coordinates.setLongitude(longitude);
-			//	coordinates.setCurrentTime(currentTime);
-			//coordinates.setCurrentTrip(tripid);
+			;
 				newDistance.setDistanceCoordinates(coordinates);
 				
 				try {
-					
+					//saving the coordinates.
 					dao.saveCoordinatesdatabase(coordinates);
 					
 				} catch (Exception e) {
@@ -66,15 +51,16 @@ public class GPSServiceStub implements IGPSService {
 					
 					e.printStackTrace();
 				}
-				//part that will store in database clk
-				//dao.saveCoordinatesdatabase(coordinates);
+				
 			}
 	}
 
 	public void saveDistanceObject() {
-		gpspersist.persistDistanceObject(newDistance);
+		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 
 
