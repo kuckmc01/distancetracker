@@ -117,6 +117,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 	 */
 	public List<String> SelectCursorTripID()
 	{
+		
 		Cursor cursor = getReadableDatabase().rawQuery("select distinct tripid from Coordinates_save", null);
 			cursor.moveToFirst();
 			List<String> trips = new ArrayList<String>();
@@ -137,7 +138,18 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 	public List<Coordinates> CursorForMap()
 	{
 	
-		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 1", null);
+	
+tripID1 = ResultsActivity.spinnerSet();
+	if (tripID1 != null) {
+		System.out.println(tripID1);
+	}
+	else {
+		tripID1 = "1";
+	}
+	
+	String Query = "select * from Coordinates_Save where tripid =" + tripID1 ; 
+	
+		Cursor cursor = getReadableDatabase().rawQuery(Query, null);
 		List<Coordinates> coordinatesList = new ArrayList<Coordinates>();
 		
 		cursor.moveToFirst();
