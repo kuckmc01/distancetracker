@@ -27,10 +27,14 @@ public  class Calculations  {
 		double longitude1;
 		double latitude2;
 		double longitude2;
+		myCursor.moveToLast();
+		 String time2 = myCursor.getString(6);	
 		myCursor.moveToFirst();
 		 latitude1 = Double.valueOf(myCursor.getString(2)) ;
 		 longitude1 = Double.valueOf(myCursor.getString(1)) ;
-		
+		 String time1 = myCursor.getString(6);
+		 
+		 double totaltotal = 0 ;
 		while (!myCursor.isAfterLast())
 		{
 			
@@ -45,14 +49,9 @@ public  class Calculations  {
 			 
 			 myCursor.moveToNext();
 			 distancetotal = Math.sqrt ((totallat * totallat) + (totallong * totallong));
-		
-			System.out.println("The total distance is " + distancetotal);
 			
-			
-			
-		}
-		
-		 
+			 totaltotal = distancetotal + totaltotal;
+		}	 
 		}
 		
 	}
