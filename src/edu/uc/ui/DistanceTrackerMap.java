@@ -15,63 +15,50 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 public class DistanceTrackerMap extends MapActivity {
-	
-	private int latitude;
-	private int longitude;
+
+
 	private GPSDAODatabase dao;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.activity_map);
-	    dao = new GPSDAODatabase(this);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_map);
+
+		//load the layout file into the map
 		MapView mapView = (MapView) findViewById(R.id.mapview);
-	    mapView.setBuiltInZoomControls(true);
-	    List<Overlay> mapOverlays = mapView.getOverlays();
-	    Drawable drawable = this.getResources().getDrawable(R.drawable.androidmaker);
-	    DistanceTrackerItemizedOverlay itemizedoverlay = new DistanceTrackerItemizedOverlay(drawable, this);
+		// this unable you to zoom in and zoom out
+		mapView.setBuiltInZoomControls(true);
+		//initialize the dao instance.
+		dao = new GPSDAODatabase(this);
+		List<Overlay> mapOverlays = mapView.getOverlays();
+		// add a picture to show where is your current position on the map
+		Drawable drawable = this.getResources().getDrawable(R.drawable.androidmaker);
+		DistanceTrackerItemizedOverlay itemizedoverlay = new DistanceTrackerItemizedOverlay(drawable, this);
+		// get the coordinates from the database
+		List<Coordinates> points = dao.CursorForMap();
+		// loop through and display the coordinates on the map 
+		for (int i = 0; i < points.size();i++)
+		{
+			int testlat =  (int) dao.CursorForMap().get(i).getLatitude();
+			int testlong =  (int) dao.CursorForMap().get(i).getLongitude();
+			//Create the GeoPoint that defines the map coordinates for the overlay item.
+			GeoPoint point = new GeoPoint(testlat, testlong);
+			OverlayItem overlayitem = new OverlayItem(point, "" + testlat, "" + testlong);
+			//add the overlay item to the collection and add the itemizedOverlay to the mapView
+			itemizedoverlay.addOverlay(overlayitem);
+			mapOverlays.add(itemizedoverlay);
+		} 
 
-	    
-	    List<Coordinates> points = dao.CursorForMap();
-	    //points.size(); 
-	    for (int i = 0; i < points.size();i++)
-	    {
-	    int testlat =  (int) dao.CursorForMap().get(i).getLatitude();
-	    int testlong =  (int) dao.CursorForMap().get(i).getLongitude();
-
-	    GeoPoint point = new GeoPoint(testlat ,testlong);
-	    OverlayItem overlayitem = new OverlayItem(point, "" + testlat, "" + testlong);
-		itemizedoverlay.addOverlay(overlayitem);
-		mapOverlays.add(itemizedoverlay);
-
-	    
-	    }
-	    //GeoPoint point = new GeoPoint(latitude,longitude);
-		//OverlayItem overlayitem = new OverlayItem(point, ""+ latitude ,""+ longitude);
-	    
-	
 	}
-	 
-	
+
+	//This method(isRouteDisplayed()) is required to see if you're currently displaying any route information.
+
 	@Override
 	protected boolean isRouteDisplayed() {
-	    return false;
-	}
-	
-	 private int getLatitude() {
-		return latitude;
+		return false;
 	}
 
-	private void setLatitude(int latitude) {
-		this.latitude = latitude;
-	}
-	private int getLongitude() {
-		return longitude;
-	}
 
-	private void setLongitude(int longitude) {
-		this.longitude = longitude;
-	}
-	
+
 
 }
