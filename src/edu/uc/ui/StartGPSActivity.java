@@ -2,7 +2,9 @@ package edu.uc.ui;
 
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import edu.uc.dao.GPSDAODatabase;
 import edu.uc.service.Calculations;
@@ -20,8 +22,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,7 +80,7 @@ public class StartGPSActivity extends Activity {
 		setContentView(R.layout.startgpsactivity);
         
 		 Log.i(DEBUG_TAG, "Info about the onCreate method in the StartGPSActivity."); 
-		 
+			
 		btnStartGPSTracking = (Button) findViewById(R.id.btnstartgpstracking);
 		btnStopGPSTracking = (Button) findViewById(R.id.btnstoptracking);
 		btnViewResults = (Button) findViewById(R.id.btnviewresults);
@@ -93,7 +97,7 @@ public class StartGPSActivity extends Activity {
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		dao = new GPSDAODatabase(this);
 		initLocationListener();
-		
+
 /** TODO:
  * The button starts gps tracking
  * need to save the following items to the DATABASE through the service layer and persistence layer:
@@ -108,13 +112,13 @@ public class StartGPSActivity extends Activity {
 				service.saveTodaysDate(todaysDate);
 				
 				requestUpdates();
-
+				
 				tripid = dao.CursorTripID() + 1;
 				System.out.println("The trip id is " + tripid);
 				 Log.i(DEBUG_TAG, "Info about the btnSartGPSTracking in the StartGPSActivity."); 
 				if(currentState == state2)
 				{
-					
+
 					timer.setBase(SystemClock.elapsedRealtime());
 					timer.start();
 					currentState = state4;
@@ -141,6 +145,8 @@ public class StartGPSActivity extends Activity {
 				}
 			}
 		});
+		
+		
 		/**TODO:
 		 * need to save the following items to the DATABASE through the service layer and persistence layer:
 		 * -ending coordinates
@@ -181,14 +187,16 @@ public class StartGPSActivity extends Activity {
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
 
 			Calculations.calc(dao);
-			dao.CursorForMap();
 			
-		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity."); 
+
+		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
+		 
 		 }
 		});
 	}
 
-
+	
+	
 	private void initLocationListener(){
 		locationListener = new LocationListener(){
 

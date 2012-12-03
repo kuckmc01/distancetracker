@@ -14,11 +14,13 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Spinner;
 import android.widget.Toast;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
 import edu.uc.service.Calculations;
 import edu.uc.service.GPSServiceStub;
+import edu.uc.ui.R;
 
 /*
  * The goal of this class is to store the coordinates and time into
@@ -80,18 +82,38 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"longitude",
 	  		  "latitude", "dates" }, null, null, null,null, null);    
 			
+
 			cursor.moveToLast();
+			
 			System.out.println(Double.valueOf(cursor.getString(1)));
-					
+			
+			
 			 return Double.valueOf(cursor.getString(1));
 			
 			
 	}
+	
+	public List<String> SelectCursorTripID()
+	{
+		Cursor cursor = getReadableDatabase().rawQuery("select distinct tripid from Coordinates_save", null);
+			cursor.moveToFirst();
+			List<String> trips = new ArrayList<String>();
+
+			while (!cursor.isAfterLast())
+			{
+				trips.add(cursor.getString(0));
+				cursor.moveToNext();
+
+			}
 			
+			return trips;
+			
+	}	
 
 	public List<Coordinates> CursorForMap()
 	{
-		
+	//	Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		// spinner.getSelectedItem().toString();
 		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 2", null);
 		List<Coordinates> coordinatesList = new ArrayList<Coordinates>();
 		
