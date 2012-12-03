@@ -176,7 +176,6 @@ public class StartGPSActivity extends Activity {
 				 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");
 
 			
-			Calculations.time(dao);
 			
 
 		 Log.i(DEBUG_TAG, "Info about the View Results button in the StartGPSActivity.");

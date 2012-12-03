@@ -15,6 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
+import edu.uc.ui.ResultsActivity;
 
 /*
  * The goal of this class is to store the coordinates and time into
@@ -30,7 +31,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		private static final String longitude = "longitude";
 		private static final String dates = "dates";
 		private static final String tripid = "tripID";
-		
+		String tripID1 = null;
 		static final String coID = "_id";
 		//creating database
 		
@@ -71,8 +72,21 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		*/
 		public android.database.Cursor Cursor()
 		{
+			
+			
+			tripID1 = ResultsActivity.spinnerSet();
+			if (tripID1 != null) {
+				System.out.println(tripID1);
+			}
+			else {
+				tripID1 = "1";
+			}
+			
+			String whereclause = "tripID =" + tripID1;
+			
+			
 			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"latitude",
-	  		  "longitude", "dates" }, "tripID = 1", null, null,null, null);    
+	  		  "longitude", "dates" }, whereclause, null, null,null, null);    
 			
 			return cursor;
 		}

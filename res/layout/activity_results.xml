@@ -21,24 +21,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/MapButton" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="21dp" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_marginBottom="73dp"
-        android:layout_toLeftOf="@+id/textView1"
-        android:text="@string/timetraveled"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <TextView
         android:id="@+id/miles"
         android:layout_width="wrap_content"
@@ -47,6 +29,45 @@
         android:layout_alignLeft="@+id/time"
         android:layout_marginBottom="24dp"
         android:text="@string/milestraveled"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="39dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/miles"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="23dp"
+        android:text="@string/tripidselect"
+       
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/miles"
+        android:layout_below="@+id/spinner1"
+         android:text="@string/calculate"
+       
+         />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="40dp"
+        android:text="@string/timetraveled"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
