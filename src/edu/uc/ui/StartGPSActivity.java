@@ -2,16 +2,12 @@ package edu.uc.ui;
 
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import edu.uc.dao.GPSDAODatabase;
 import edu.uc.service.Calculations;
 import edu.uc.service.GPSServiceStub;
 import edu.uc.service.IGPSService;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,10 +18,8 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 

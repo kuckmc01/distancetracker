@@ -11,16 +11,10 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Spinner;
-import android.widget.Toast;
 import edu.uc.dto.Coordinates;
 import edu.uc.dto.Distance;
-import edu.uc.service.Calculations;
-import edu.uc.service.GPSServiceStub;
-import edu.uc.ui.R;
 
 /*
  * The goal of this class is to store the coordinates and time into
@@ -30,7 +24,7 @@ import edu.uc.ui.R;
 public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO 
 
  {
-	
+	//These are the strings we will use to create the database. 
 		private static final String Coordinates_Save = "Coordinates_Save";
 		private static final String latitude = "latitude";
 		private static final String longitude = "longitude";
@@ -44,6 +38,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			super(context, "Coordinates_Save", null, 1 );
 		}
 		@Override
+		//Query to create the database.
 		public void onCreate(SQLiteDatabase db) {
 		String createTableStatement = "CREATE TABLE Coordinates_Save (_id INTEGER PRIMARY KEY AUTOINCREMENT, tripID DOUBLE, coID INT, latitude  DOUBLE, longitude DOUBLE,  dates date);";
 		
@@ -60,7 +55,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		values.put(longitude, coordinates.getLongitude());
 		values.put(dates, coordinates.getCurrentTime().toString());
 		values.put(tripid, coordinates.getCurrentTrip());
-		
+		//placing lat,long,dates,tripid into the database
 		
 		
 			getWritableDatabase().insert(Coordinates_Save, dates, values);
@@ -69,6 +64,11 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 		
 		
 		}
+		
+		/*This cursor is used for calculations. The goal is to use the spinner to select the tripID but currently we have it hardcoded
+		* The spinner is populated and onclick could populate this query.
+		*
+		*/
 		public android.database.Cursor Cursor()
 		{
 			Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"latitude",
@@ -79,6 +79,10 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 	
 	public Double CursorTripID()
 	{
+		/* This Cursor is used to populate the tripid. In another database (oracle, mysql) Two tables would have been used, I think.
+		We can use two tables in SQLite but the nested selects would have been messy. This is just as easy. This will be called when a trip
+		is started.
+		*/
 		Cursor cursor = getReadableDatabase().query(Coordinates_Save, new String[] {"_id", "tripID" ,"longitude",
 	  		  "latitude", "dates" }, null, null, null,null, null);    
 			
@@ -94,7 +98,9 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			
 			
 	}
-	
+	/* This trip is populate the cursor with all the trip ids. 
+	 * 
+	 */
 	public List<String> SelectCursorTripID()
 	{
 		Cursor cursor = getReadableDatabase().rawQuery("select distinct tripid from Coordinates_save", null);
@@ -111,11 +117,12 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			return trips;
 			
 	}	
-
+	/*
+	 * This cursor is to populate the map coordinates to use for points.
+	 */
 	public List<Coordinates> CursorForMap()
 	{
-	//	Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		// spinner.getSelectedItem().toString();
+	
 		Cursor cursor = getReadableDatabase().rawQuery("select * from Coordinates_Save where tripid = 2", null);
 		List<Coordinates> coordinatesList = new ArrayList<Coordinates>();
 		
@@ -134,7 +141,7 @@ public class GPSDAODatabase extends SQLiteOpenHelper implements IGPSDAO
 			String thing = cursor.getString(5);
 			
 			
-			
+			//We coudl not figure out how to a date out of the database as a date, even though it is stored as date in SQLlite
 			Date date;
 			try {
 				date = (Date)formatter.parse(thing);

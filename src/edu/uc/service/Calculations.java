@@ -1,28 +1,20 @@
 package edu.uc.service;
 
-import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import edu.uc.dao.GPSDAODatabase;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract.Data;
-import android.widget.Toast;
 
 
 public  class Calculations  {
 	
 	static double  distancetotal;
-	
+	/* This calculates the time and subtracts the start from final.
+	 * The date is in milliseconds since 1970 (Epoch time) so we have to divide by 360000 to get hours....
+	 */
 	public static void time(GPSDAODatabase dao)
 	
 	{
@@ -62,6 +54,10 @@ public  class Calculations  {
 	
 	}
 
+	/*
+	 * This is for calculating the coordinates. We use the distance formula with one slight modification due to earth's curvature
+	 * We have tested our numbers against different websites and it is very close. More detailed calculations could be more exact.
+	 */
 	public static void calc(GPSDAODatabase dao)
 	{
 		
@@ -80,7 +76,7 @@ public  class Calculations  {
 		 double totaltotal = 0 ;
 		while (!myCursor.isAfterLast())
 		{
-			
+			//gets second lat and long.
 			 latitude2 = Double.valueOf(myCursor.getString(2));
 			 longitude2 = Double.valueOf(myCursor.getString(3));
 			 
